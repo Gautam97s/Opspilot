@@ -15,3 +15,11 @@ This document tracks the features implemented in the production-ready MCP server
 | Security Guards | Path traversal protection, shell=False, 5s timeouts | [x] Completed |
 | Lightweight Sandbox | Multi-backend executor (Firejail, Bwrap, Fallback) | [x] Completed |
 | Resource Isolation | PID/Network isolation via namespaces (where supported) | [x] Completed |
+| LLM Client | Multi-provider (Ollama/Gemini) with automatic fallback and tool calling | [x] Completed |
+| Safety Engine | SQLite-backed policy engine with path whitelisting | [x] Completed |
+| Approval Queue | Manual intervention for high-risk operations with 30min TTL | [x] Completed |
+| Audit Log | Immutable persistence of all tool execution attempts | [x] Completed |
+| Rich CLI | Interactive REPL with panels, spinners, and risk-aware tool listing | [x] Completed |
+| Gradio Web UI | Dashboard with Chat, Approval management, and real-time logs | [x] Completed |
+| Test Suite | 10+ Pytest cases for tools, sandbox, safety, and security | [x] Completed |
+| Unified Startup | `start.py` for automated dependency, model, and server boot | [x] Completed |

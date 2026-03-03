@@ -19,7 +19,7 @@ async def lifespan(app: FastAPI):
     # Startup
     setup_logging()
     logger = structlog.get_logger()
-    await logger.info("mcp_server_started", version="0.1.0")
+    logger.info("mcp_server_started", version="0.1.0")
     yield
     # Shutdown
-    await logger.info("mcp_server_stopped")
+    logger.info("mcp_server_stopped")

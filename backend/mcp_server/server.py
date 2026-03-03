@@ -46,7 +46,7 @@ async def health():
 
 @app.post("/initialize", response_model=JSONRPCResponse)
 async def initialize(request: InitializeRequest):
-    await logger.info("initialize_request", client_info=request.params.clientInfo.model_dump())
+    logger.info("initialize_request", client_info=request.params.clientInfo.model_dump())
     
     result = InitializeResult(
         protocolVersion="2024-11-05",
@@ -58,7 +58,7 @@ async def initialize(request: InitializeRequest):
 
 @app.get("/tools/list", response_model=JSONRPCResponse)
 async def list_tools():
-    await logger.info("list_tools_request")
+    logger.info("list_tools_request")
     mcp_tools = [
         Tool(name=t.name, description=t.description, inputSchema=t.input_schema)
         for t in registry.list_tools()
@@ -68,7 +68,7 @@ async def list_tools():
 
 @app.post("/tools/call", response_model=JSONRPCResponse)
 async def call_tool(request: CallToolRequest):
-    await logger.info("call_tool_request", tool=request.params.name)
+    logger.info("call_tool_request", tool=request.params.name)
     
     tool_func = registry.get_tool(request.params.name)
     if not tool_func:
@@ -86,7 +86,7 @@ async def call_tool(request: CallToolRequest):
         result = CallToolResult(content=content)
         return JSONRPCResponse(id=request.id, result=result.model_dump())
     except Exception as e:
-        await logger.error("tool_execution_failed", tool=request.params.name, error=str(e))
+        logger.error("tool_execution_failed", tool=request.params.name, error=str(e))
         return JSONRPCResponse(
             id=request.id,
             error={"code": -32000, "message": f"Tool execution failed: {str(e)}"}

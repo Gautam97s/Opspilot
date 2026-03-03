@@ -2,9 +2,9 @@ import os
 import platform
 import shutil
 from typing import List
-from backend.mcp_server.sandbox.backends.firejail import FirejailBackend
-from backend.mcp_server.sandbox.backends.bwrap import BwrapBackend
-from backend.mcp_server.sandbox.fallback import FallbackBackend
+from mcp_server.sandbox.backends.firejail import FirejailBackend
+from mcp_server.sandbox.backends.bwrap import BwrapBackend
+from mcp_server.sandbox.fallback import FallbackBackend
 
 class SandboxExecutor:
     def __init__(self):

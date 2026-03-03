@@ -2,8 +2,8 @@ import os
 import subprocess
 import asyncio
 from typing import Optional
-from backend.mcp_server.tools.base import tool
-from backend.mcp_server.tools.registry import registry
+from mcp_server.tools.base import tool
+from mcp_server.tools.registry import registry
 
 TIMEOUT = 5.0
 

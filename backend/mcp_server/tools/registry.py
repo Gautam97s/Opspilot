@@ -1,6 +1,6 @@
 import inspect
-from typing import Any, Callable, Dict, List
-from backend.mcp_server.tools.base import ToolMetadata
+from typing import Any, Callable, Dict, List, Optional
+from mcp_server.tools.base import ToolMetadata
 
 class ToolRegistry:
     def __init__(self):
