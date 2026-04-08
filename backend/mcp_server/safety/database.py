@@ -1,13 +1,18 @@
 import aiosqlite
 import os
 
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "opspilot.db")
-
 import contextlib
+
+
+def get_db_path() -> str:
+    override = os.getenv("OPSPILOT_DB_PATH")
+    if override:
+        return override
+    return os.path.join(os.path.dirname(os.path.dirname(__file__)), "opspilot.db")
 
 @contextlib.asynccontextmanager
 async def get_db():
-    async with aiosqlite.connect(DB_PATH) as db:
+    async with aiosqlite.connect(get_db_path()) as db:
         db.row_factory = aiosqlite.Row
         yield db
 

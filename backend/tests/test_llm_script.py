@@ -1,5 +1,5 @@
 import asyncio
-from llm import chat
+from mcp_server.llm import chat
 
 async def test_chat():
     print("--- Testing LLM Chat ---")

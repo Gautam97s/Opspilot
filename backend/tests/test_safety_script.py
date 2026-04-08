@@ -1,6 +1,6 @@
 import asyncio
 import json
-from safety import check_policy, get_risk_level, create_request, get_pending, approve, reject, log_action, init_db
+from mcp_server.safety import check_policy, get_risk_level, create_request, get_pending, approve, reject, log_action, init_db
 
 async def test_safety():
     print("--- Testing Safety System ---")

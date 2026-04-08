@@ -1,6 +1,9 @@
+import asyncio
+import contextlib
 import structlog
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from mcp_server.safety import cleanup_expired, init_db
 
 def setup_logging():
     structlog.configure(
@@ -18,8 +21,15 @@ def setup_logging():
 async def lifespan(app: FastAPI):
     # Startup
     setup_logging()
+    await init_db()
+    cleanup_task = asyncio.create_task(cleanup_expired())
     logger = structlog.get_logger()
     logger.info("mcp_server_started", version="0.1.0")
-    yield
+    try:
+        yield
+    finally:
+        cleanup_task.cancel()
+        with contextlib.suppress(asyncio.CancelledError):
+            await cleanup_task
     # Shutdown
     logger.info("mcp_server_stopped")

@@ -19,6 +19,11 @@ async def get_pending():
         async with db.execute("SELECT * FROM approvals WHERE status = 'pending'") as cursor:
             return await cursor.fetchall()
 
+async def get_request(request_id: str):
+    async with get_db() as db:
+        async with db.execute("SELECT * FROM approvals WHERE id = ?", (request_id,)) as cursor:
+            return await cursor.fetchone()
+
 async def approve(request_id: str):
     async with get_db() as db:
         await db.execute(

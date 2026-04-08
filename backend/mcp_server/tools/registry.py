@@ -39,6 +39,12 @@ class ToolRegistry:
     def get_tool(self, name: str) -> Optional[Callable]:
         return self._tools.get(name)
 
+    def get_tool_metadata(self, name: str) -> Optional[ToolMetadata]:
+        func = self.get_tool(name)
+        if not func:
+            return None
+        return getattr(func, "_mcp_tool", None)
+
     def list_tools(self) -> List[ToolMetadata]:
         return [func._mcp_tool for func in self._tools.values()]
 
